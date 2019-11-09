@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  description: swagger file - nvienot - loto / euromillion
+  version: "1.0.0"
+  title: Swagger REST loto / euromillion
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+basePath: "/api"
+
+# Paths supported by the server application
+paths:
+  /results:
+    get:
+      operationId: "results.read"
+      tags:
+        - "Results"
+      summary: "Loto and euromillion results"
+      description: "Loto and euromillion results"
+      responses:
+        200:
+          description: "Successful read of loto and euromillion results"
+          schema:
+            type: "array"
+            items:
+              properties:
+                type:
+                  type: "string"
+                nums:
+                  type: "string"
+                timestamp:
+                  type: "string"
