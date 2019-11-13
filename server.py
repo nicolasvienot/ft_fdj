@@ -5,8 +5,8 @@ from flask import Flask
 import connexion
 
 # Create the application instance
-app = connexion.App(__name__, specification_dir='./')
-
+# app = connexion.App(__name__, specification_dir='./')
+app = Flask(__name__)
 # Read the swagger.yml file to configure the endpoints
 app.add_api('swagger.yml')
 
@@ -28,7 +28,7 @@ def home():
     localhost:5000/
     :return:        the rendered template 'home.html'
     """
-	app.add_api('swagger.yml')
+	# app.add_api('swagger.yml')
     return render_template('home.html')
 
 # If we're running in stand alone mode, run the application
