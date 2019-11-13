@@ -5,13 +5,12 @@ from flask import Flask
 import connexion
 
 # Create the application instance
-# app = connexion.App(__name__, specification_dir='./')
-app = Flask(__name__)
+app = connexion.App(__name__, specification_dir='./')
 # Read the swagger.yml file to configure the endpoints
 app.add_api('swagger.yml')
 
 # Create a URL route in our application for "/"
-@app.before_first_request
+@app.before_request
 def activate_job():
     def run_job():
         while True:
