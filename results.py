@@ -18,80 +18,80 @@ def read():
     """
 
 	#LOTO
-# Set the URL you want to webscrape from
-url = 'https://www.fdj.fr/jeux-de-tirage/loto/?jeu=loto'
+	# Set the URL you want to webscrape from
+	url = 'https://www.fdj.fr/jeux-de-tirage/loto/?jeu=loto'
 
-# Connect to the URL
-response = requests.get(url)
+	# Connect to the URL
+	response = requests.get(url)
 
-# print(response)
+	# print(response)
 
-# Parse HTML and save to BeautifulSoup object¶
-soup = BeautifulSoup(response.text, "html.parser")
+	# Parse HTML and save to BeautifulSoup object¶
+	soup = BeautifulSoup(response.text, "html.parser")
 
-# print("soup ", soup)
+	# print("soup ", soup)
 
-soup.find("div", {"id": "articlebody"})
+	soup.find("div", {"id": "articlebody"})
 
-loto = ""
-test = 0
-for div in soup.find_all('div', {"class":"numbers-item"}):
-    # print (div.span.contents[0])
-    if test == 0:
-        loto = div.span.contents[0]
-        test = 1
-    else:
-        loto = loto + " " + div.span.contents[0]
+	loto = ""
+	test = 0
+	for div in soup.find_all('div', {"class":"numbers-item"}):
+		# print (div.span.contents[0])
+		if test == 0:
+			loto = div.span.contents[0]
+			test = 1
+		else:
+			loto = loto + " " + div.span.contents[0]
 
-for div in soup.find_all('div', {"class":"drawing-infos_title"}):
-    test = test + div
+	for div in soup.find_all('div', {"class":"drawing-infos_title"}):
+		test = test + div
 
-dateloto1 = soup.find('h1', {"class":"drawing-infos_title"})
-dateloto = dateloto1.contents[0]
+	dateloto1 = soup.find('h1', {"class":"drawing-infos_title"})
+	dateloto = dateloto1.contents[0]
 
-#EUROMILLION
+	#EUROMILLION
 
-url = 'https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats'
+	url = 'https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats'
 
-# Connect to the URL
-response = requests.get(url)
+	# Connect to the URL
+	response = requests.get(url)
 
-# print(response)
+	# print(response)
 
-# Parse HTML and save to BeautifulSoup object¶
-soup = BeautifulSoup(response.text, "html.parser")
+	# Parse HTML and save to BeautifulSoup object¶
+	soup = BeautifulSoup(response.text, "html.parser")
 
-# print("soup ", soup)
+	# print("soup ", soup)
 
-soup.find("div", {"id": "articlebody"})
+	soup.find("div", {"id": "articlebody"})
 
-euromil = ""
-test = 0
-for div in soup.find_all('div', {"class":"numbers-item"}):
-    # print (div.span.contents[0])
-    if test == 0:
-        euromil = div.span.contents[0]
-        test = 1
-    else:
-        euromil = euromil + " " + div.span.contents[0]
+	euromil = ""
+	test = 0
+	for div in soup.find_all('div', {"class":"numbers-item"}):
+		# print (div.span.contents[0])
+		if test == 0:
+			euromil = div.span.contents[0]
+			test = 1
+		else:
+			euromil = euromil + " " + div.span.contents[0]
 
-dateeuro1 = soup.find('h1', {"class":"drawing-infos_title"})
-dateeuro = dateeuro1.contents[0]
+	dateeuro1 = soup.find('h1', {"class":"drawing-infos_title"})
+	dateeuro = dateeuro1.contents[0]
 
-RESULTS = { 
-    "Loto": {
-        "type":"loto",
-        "nums": loto,
-        "date-tirage":dateloto,
-        "timestamp": get_timestamp()
-    },
-    "Euromillion": {
-        "type":"euromillion",
-        "date-tirage":dateeuro,
-        "nums": euromil,
-        "timestamp": get_timestamp()
-    }
-}
+	RESULTS = { 
+		"Loto": {
+			"type":"loto",
+			"nums": loto,
+			"date-tirage":dateloto,
+			"timestamp": get_timestamp()
+		},
+		"Euromillion": {
+			"type":"euromillion",
+			"date-tirage":dateeuro,
+			"nums": euromil,
+			"timestamp": get_timestamp()
+		}
+	}
 
-    # Create the list of people from our data
-    return [RESULTS[key] for key in sorted(RESULTS.keys())]
+	# Create the list of people from our data
+	return [RESULTS[key] for key in sorted(RESULTS.keys())]
