@@ -1,4 +1,3 @@
-# Import libraries
 from datetime import datetime
 import requests
 import urllib.request
@@ -7,36 +6,18 @@ from bs4 import BeautifulSoup
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
 
-
-
 def read():
-	"""
-	This function responds to a request for /api/people
-	with the complete lists of people
-
-	:return:        sorted list of people
-	"""
-
 	#LOTO
-	# Set the URL you want to webscrape from
-	url = 'https://www.fdj.fr/jeux-de-tirage/loto/?jeu=loto'
 
-	# Connect to the URL
+	url = 'https://www.fdj.fr/jeux-de-tirage/loto/?jeu=loto'
 	response = requests.get(url)
 
-	# print(response)
-
-	# Parse HTML and save to BeautifulSoup object¶
 	soup = BeautifulSoup(response.text, "html.parser")
-
-	# print("soup ", soup)
-
 	soup.find("div", {"id": "articlebody"})
 
 	loto = ""
 	test = 0
 	for div in soup.find_all('div', {"class":"numbers-item"}):
-		# print (div.span.contents[0])
 		if test == 0:
 			loto = div.span.contents[0]
 			test = 1
@@ -52,23 +33,14 @@ def read():
 	#EUROMILLION
 
 	url = 'https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats'
-
-	# Connect to the URL
 	response = requests.get(url)
 
-	# print(response)
-
-	# Parse HTML and save to BeautifulSoup object¶
 	soup = BeautifulSoup(response.text, "html.parser")
-
-	# print("soup ", soup)
-
 	soup.find("div", {"id": "articlebody"})
 
 	euromil = ""
 	test = 0
 	for div in soup.find_all('div', {"class":"numbers-item"}):
-		# print (div.span.contents[0])
 		if test == 0:
 			euromil = div.span.contents[0]
 			test = 1
@@ -92,6 +64,4 @@ def read():
 			"timestamp": get_timestamp()
 		}
 	}
-
-	# Create the list of people from our data
 	return [RESULTS[key] for key in sorted(RESULTS.keys())]

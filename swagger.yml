@@ -10,7 +10,6 @@ produces:
 
 basePath: "/api"
 
-# Paths supported by the server application
 paths:
   /results:
     get:
