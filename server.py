@@ -10,13 +10,13 @@ app = connexion.App(__name__, specification_dir='./')
 app.add_api('swagger.yml')
 
 # Create a URL route in our application for "/"
-@app.before_request
-def activate_job():
-    def run_job():
-		app.add_api('swagger.yml')
+# @app.app.before_request
+# def activate_job():
+#     def run_job():
+# 		app.app.add_api('swagger.yml')
 
-    thread = threading.Thread(target=run_job)
-    thread.start()
+#     thread = threading.Thread(target=run_job)
+#     thread.start()
 
 @app.route('/')
 def home():
