@@ -10,12 +10,12 @@ def get_timestamp():
 
 
 def read():
-    """
-    This function responds to a request for /api/people
-    with the complete lists of people
+	"""
+	This function responds to a request for /api/people
+	with the complete lists of people
 
-    :return:        sorted list of people
-    """
+	:return:        sorted list of people
+	"""
 
 	#LOTO
 	# Set the URL you want to webscrape from
